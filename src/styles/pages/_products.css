@@ -1,0 +1,224 @@
+/* ============================================================
+   PRODUCTS PAGE — Filter pills with active glow,
+   animated count badge, premium grid header
+   ============================================================ */
+
+.products-page {
+  max-width: var(--layout-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-12);
+  animation: pageEntrance 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (min-width: 768px) { .products-page { padding-top: var(--space-8); } }
+
+/* ── Header ── */
+.products-page__header { margin-bottom: var(--space-5); }
+
+.products-page__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-gray-900);
+  letter-spacing: -0.03em;
+  line-height: var(--line-height-tight);
+  background: linear-gradient(135deg, var(--color-gray-900), var(--color-primary-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@media (min-width: 768px) { .products-page__title { font-size: var(--font-size-3xl); } }
+
+.products-page__count {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  margin-top: 4px;
+}
+
+/* ── Active filters bar ── */
+.active-filters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(135deg, var(--color-primary-50), var(--color-accent-100));
+  border: 1px solid var(--color-primary-200);
+  border-radius: var(--radius-xl);
+  animation: fadeInDown 0.3s ease both;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+}
+
+.active-filters__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-600);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.active-filters__clear {
+  margin-left: auto;
+  font-size: var(--font-size-xs);
+  color: var(--color-rose-500);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: color var(--transition-fast), transform var(--transition-spring);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.active-filters__clear:hover {
+  color: var(--color-rose-600);
+  transform: scale(1.05);
+}
+
+/* ── Sidebar panel ── */
+.sidebar-panel {
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-gray-150);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+  transition: box-shadow var(--transition-base);
+}
+
+.sidebar-panel:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Mobile: horizontal pill strip */
+@media (max-width: 1023px) {
+  .sidebar-panel {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-xl);
+  }
+
+  .sidebar-panel .sidebar-panel__title { display: none; }
+
+  .sidebar-panel .category-list {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: var(--space-2);
+    padding-bottom: 4px;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .sidebar-panel .category-list::-webkit-scrollbar { display: none; }
+
+  .sidebar-panel .category-item {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 7px 16px;
+    border: 1.5px solid var(--color-gray-200);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    background: var(--color-white);
+    width: auto;
+    text-align: center;
+    transition:
+      background var(--transition-base),
+      color var(--transition-base),
+      border-color var(--transition-base),
+      box-shadow var(--transition-base),
+      transform var(--transition-spring);
+  }
+
+  .sidebar-panel .category-item:hover {
+    border-color: var(--color-primary-300);
+    color: var(--color-primary-600);
+    background: var(--color-primary-50);
+    transform: translateY(-1px);
+  }
+
+  .sidebar-panel .category-item--active {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: var(--color-white);
+    box-shadow: 0 4px 12px rgb(79 70 229 / 0.3);
+    transform: translateY(-1px);
+  }
+}
+
+.sidebar-panel__title {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-3);
+}
+
+/* Category list (desktop vertical) */
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.category-item {
+  width: 100%;
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-spring),
+    box-shadow var(--transition-fast);
+  text-transform: capitalize;
+  line-height: var(--line-height-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Slide-in background indicator for desktop */
+.category-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gradient-primary);
+  border-radius: 0 var(--radius-full) var(--radius-full) 0;
+  transform: scaleY(0);
+  transition: transform var(--transition-base);
+}
+
+.category-item:hover {
+  background: var(--color-gray-100);
+  color: var(--color-gray-900);
+  transform: translateX(2px);
+}
+
+.category-item--active {
+  background: linear-gradient(135deg, var(--color-primary-50), var(--color-accent-100));
+  color: var(--color-primary-700);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: inset 0 0 0 1px var(--color-primary-200);
+}
+
+.category-item--active::before {
+  transform: scaleY(1);
+}
+
+.category-item--active:hover {
+  background: linear-gradient(135deg, var(--color-primary-100), var(--color-accent-100));
+  transform: translateX(2px);
+}

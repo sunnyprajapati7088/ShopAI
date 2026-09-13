@@ -1,0 +1,204 @@
+/* ============================================================
+   PAGE LOADER — Full-screen pixel-perfect branded splash
+   ============================================================ */
+
+@keyframes loaderFadeOut {
+  from { opacity: 1; transform: scale(1);     }
+  to   { opacity: 0; transform: scale(1.04);  }
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes ringRotateReverse {
+  from { transform: rotate(0deg);    }
+  to   { transform: rotate(-360deg); }
+}
+
+@keyframes ringPulse {
+  0%, 100% { transform: scale(1);    opacity: 0.5; }
+  50%       { transform: scale(1.08); opacity: 0.2; }
+}
+
+@keyframes loaderLogoIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);   }
+}
+
+@keyframes loaderTagline {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+@keyframes barGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(99,102,241,0.6);  }
+  50%       { box-shadow: 0 0 20px rgba(139,92,246,0.8); }
+}
+
+/* ── Full-screen overlay ── */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gray-950, #020617);
+  overflow: hidden;
+}
+
+.page-loader--exit {
+  animation: loaderFadeOut 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
+  pointer-events: none;
+}
+
+/* Background gradient */
+.page-loader__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.12) 0%, transparent 60%),
+    linear-gradient(160deg, #020617 0%, #0f172a 60%, #1a0a2e 100%);
+  pointer-events: none;
+}
+
+/* Decorative orbs */
+.page-loader__orb {
+  position: absolute;
+  border-radius: var(--radius-full);
+  pointer-events: none;
+}
+
+.page-loader__orb--1 {
+  width: 500px;
+  height: 500px;
+  top: -120px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+  animation: orbFloat1 12s ease-in-out infinite;
+}
+
+.page-loader__orb--2 {
+  width: 400px;
+  height: 400px;
+  bottom: -100px;
+  left: -80px;
+  background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%);
+  animation: orbFloat2 15s ease-in-out infinite;
+}
+
+/* ── Content container ── */
+.page-loader__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 280px;
+}
+
+/* ── Spinning ring ── */
+.page-loader__ring {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--space-2);
+}
+
+.page-loader__ring-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  border: 3px solid transparent;
+  border-top-color: var(--color-primary-400, #818cf8);
+  border-right-color: var(--color-accent-400, #a78bfa);
+  animation: ringRotate 1.2s linear infinite;
+}
+
+.page-loader__ring-inner::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  border-bottom-color: rgba(99,102,241,0.5);
+  border-left-color: rgba(139,92,246,0.5);
+  animation: ringRotateReverse 1.8s linear infinite;
+}
+
+.page-loader__ring-pulse {
+  position: absolute;
+  inset: -8px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+  animation: ringPulse 2s ease-in-out infinite;
+}
+
+/* ── Logo ── */
+.page-loader__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  animation: loaderLogoIn 0.5s ease both 0.2s;
+}
+
+.page-loader__logo-icon {
+  font-size: 2rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 12px rgba(99,102,241,0.6));
+}
+
+.page-loader__logo-text {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+  background: linear-gradient(135deg, #a5b4fc, #c4b5fd, #818cf8);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 3s linear infinite;
+  letter-spacing: -0.03em;
+}
+
+/* ── Tagline ── */
+.page-loader__tagline {
+  font-size: var(--font-size-sm);
+  color: rgba(148, 163, 184, 0.8);
+  letter-spacing: 0.02em;
+  animation: loaderTagline 0.5s ease both 0.35s;
+  text-align: center;
+}
+
+/* ── Progress bar ── */
+.page-loader__bar-wrap {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.page-loader__bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary-500, #6366f1), var(--color-accent-400, #a78bfa), var(--color-primary-400, #818cf8));
+  background-size: 200% 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: barGlow 2s ease-in-out infinite, gradientShiftX 2s linear infinite;
+}
+
+/* ── Percentage ── */
+.page-loader__pct {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: rgba(148,163,184,0.6);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  min-width: 3ch;
+  text-align: center;
+}

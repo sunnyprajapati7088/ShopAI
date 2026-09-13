@@ -1,0 +1,340 @@
+/* ============================================================
+   NAVBAR — Frosted glass premium, clear active states,
+   gradient logo, responsive mobile menu
+   ============================================================ */
+
+/* Sticky wrapper */
+.navbar-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  width: 100%;
+}
+
+/* Bar itself */
+.navbar {
+  width: 100%;
+  max-width: 100vw;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5),
+    0 4px 16px rgba(15, 23, 42, 0.06),
+    0 1px 3px rgba(15, 23, 42, 0.04);
+  transition: box-shadow var(--transition-base), background var(--transition-base);
+  position: relative;
+}
+
+/* Top gradient stripe */
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* ── Top row ── */
+.navbar__inner {
+  max-width: var(--layout-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  position: relative;
+}
+
+/* ── Logo ── */
+.navbar__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-extrabold);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  line-height: 1;
+  transition: filter var(--transition-base), transform var(--transition-spring);
+}
+
+.navbar__logo:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+@media (min-width: 480px) { .navbar__logo { font-size: var(--font-size-lg); } }
+@media (min-width: 768px) { .navbar__logo { font-size: var(--font-size-xl); gap: 8px; } }
+
+/* ── Desktop search ── */
+.navbar__search {
+  flex: 1;
+  min-width: 0;
+  max-width: 440px;
+  display: none;
+}
+
+@media (min-width: 768px) { .navbar__search { display: block; } }
+
+/* ── Desktop nav links ── */
+.navbar__nav--desktop {
+  display: none;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) { .navbar__nav--desktop { display: flex; } }
+
+/* ── nav-link base ──
+   NO overflow:hidden — it clips ::before and ::after pseudo-elements
+   Use background directly instead of a scaled pseudo */
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-600);
+  text-decoration: none;
+  background: transparent;
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-spring);
+  white-space: nowrap;
+  /* NO overflow:hidden — would clip pseudo underline */
+}
+
+.nav-link:hover {
+  color: var(--color-gray-900);
+  background: var(--color-gray-100);
+}
+
+/* ── Active state — direct background, no pseudo tricks ── */
+.nav-link--active {
+  color: var(--color-primary-600) !important;
+  font-weight: var(--font-weight-bold);
+  background: var(--color-primary-50) !important;
+}
+
+/* Active underline — sits on top via z-index, not clipped */
+.nav-link--active::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 10px;
+  right: 10px;
+  height: 2.5px;
+  background: linear-gradient(90deg, var(--color-primary-600), var(--color-accent-500));
+  border-radius: var(--radius-full);
+  z-index: 2;
+}
+
+/* Ensure text/badge children render above the underline pseudo */
+.nav-link > * { position: relative; z-index: 1; }
+
+/* ── Count badges ── */
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  animation: scaleInBounce 0.3s var(--transition-spring) both;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-badge--indigo {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  box-shadow: 0 2px 6px rgb(79 70 229 / 0.35);
+}
+
+.nav-badge--red {
+  background: linear-gradient(135deg, var(--color-rose-500), var(--color-rose-600));
+  color: var(--color-white);
+  box-shadow: 0 2px 6px rgb(244 63 94 / 0.35);
+}
+
+/* Dot badge — absolutely positioned on icon buttons */
+.nav-badge--dot {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  font-size: 9px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  transform: translate(25%, -25%);
+}
+
+/* ── Mobile: icon buttons + hamburger ── */
+.navbar__mobile-icons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+  flex-shrink: 0;
+  padding-right: 4px;
+}
+
+@media (min-width: 768px) { .navbar__mobile-icons { display: none; } }
+
+.navbar__icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  color: var(--color-gray-600);
+  text-decoration: none;
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    transform var(--transition-spring);
+  flex-shrink: 0;
+}
+
+.navbar__icon-btn:hover,
+.navbar__icon-btn--active {
+  background: var(--color-primary-50);
+  color: var(--color-primary-600);
+  transform: scale(1.08);
+}
+
+/* ── Hamburger ── */
+.navbar__hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-lg);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 9px 7px;
+  transition: background var(--transition-fast), transform var(--transition-spring);
+  flex-shrink: 0;
+}
+
+.navbar__hamburger:hover {
+  background: var(--color-gray-100);
+  transform: scale(1.05);
+}
+
+.navbar__hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary-600), var(--color-accent-500));
+  border-radius: 2px;
+  transition: transform var(--transition-base), opacity var(--transition-base), width var(--transition-base);
+  transform-origin: center;
+}
+
+.navbar__hamburger--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.navbar__hamburger--open span:nth-child(2) { opacity: 0; width: 0; }
+.navbar__hamburger--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile search row ── */
+.navbar__mobile-search {
+  width: 100%;
+  padding-inline: var(--gutter);
+  padding-top: 8px;
+  padding-bottom: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px);
+}
+
+@media (min-width: 768px) { .navbar__mobile-search { display: none; } }
+
+/* ── Mobile dropdown ── */
+.navbar__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.32);
+  backdrop-filter: blur(3px);
+  z-index: calc(var(--z-sticky) - 1);
+  animation: fadeIn 0.18s ease both;
+}
+
+.navbar__mobile-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  top: 100%;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-gray-100);
+  box-shadow: 0 12px 32px rgb(15 23 42 / 0.14);
+  padding-inline: var(--gutter);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: slideDown 0.22s ease both;
+  z-index: var(--z-sticky);
+  /* NO overflow:hidden — clips active left-bar */
+}
+
+.navbar__mobile-menu .nav-link {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  justify-content: flex-start;
+  gap: var(--space-3);
+}
+
+/* Mobile active — solid bg + gradient left border via box-shadow (no pseudo needed) */
+.navbar__mobile-menu .nav-link--active {
+  background: linear-gradient(135deg, var(--color-primary-50), var(--color-accent-100)) !important;
+  color: var(--color-primary-700) !important;
+  font-weight: var(--font-weight-bold);
+  /* Gradient left border via box-shadow — not clipped */
+  box-shadow:
+    inset 3px 0 0 0 var(--color-primary-600),
+    inset 0 0 0 1.5px var(--color-primary-200);
+}
+
+/* Remove the bottom underline in mobile — box-shadow covers it */
+.navbar__mobile-menu .nav-link--active::after { display: none; }
+
+@media (min-width: 768px) {
+  .navbar__mobile-menu { display: none; }
+  .navbar__backdrop    { display: none; }
+}

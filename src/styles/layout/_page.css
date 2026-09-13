@@ -1,0 +1,23 @@
+/* ============================================================
+   PAGE LAYOUT WRAPPER
+   One class used by every page section and the layout helper.
+   Guarantees content edges always align with navbar + footer.
+   ============================================================ */
+
+/* The universal wrapper — max-width + responsive gutter */
+.page-wrap {
+  width: 100%;
+  max-width: var(--layout-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Page-level vertical padding (top/bottom breathing room) */
+.page-section {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .page-section { padding-top: var(--space-8); }
+}

@@ -1,0 +1,69 @@
+/* ============================================================
+   SKELETON — Multi-stop wave shimmer, premium loading states
+   ============================================================ */
+
+/* Multi-stop wave shimmer */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-150) 0%,
+    var(--color-gray-100) 20%,
+    #eef1f7            35%,
+    var(--color-gray-100) 50%,
+    var(--color-gray-150) 70%,
+    var(--color-gray-100) 85%,
+    var(--color-gray-150) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+  border-radius: var(--radius-lg);
+}
+
+.skeleton-text {
+  border-radius: var(--radius-full);
+}
+
+/* Skeleton card */
+.skeleton-card {
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--color-gray-150);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.skeleton-card__image {
+  height: 160px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-150) 0%,
+    var(--color-gray-100) 20%,
+    #eef1f7            35%,
+    var(--color-gray-100) 50%,
+    var(--color-gray-150) 70%,
+    var(--color-gray-100) 85%,
+    var(--color-gray-150) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@media (min-width: 360px) { .skeleton-card__image { height: 180px; } }
+@media (min-width: 480px) { .skeleton-card__image { height: 200px; } }
+@media (min-width: 768px) { .skeleton-card__image { height: 220px; } }
+
+.skeleton-card__body {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+@media (min-width: 480px) {
+  .skeleton-card__body { padding: var(--space-4); }
+}

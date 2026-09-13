@@ -1,0 +1,83 @@
+/* ============================================================
+   CAROUSEL — Legacy .carousel class kept for any reuse.
+   The hero carousel uses .hcarousel (defined in _home.css).
+   ============================================================ */
+
+/* ── Pagination component ── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+
+@media (min-width: 480px) {
+  .pagination { gap: var(--space-2); margin-top: var(--space-10); }
+}
+
+.pagination__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-base),
+    transform var(--transition-spring);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+@media (min-width: 480px) {
+  .pagination__btn { min-width: 38px; height: 38px; padding: 0 var(--space-3); font-size: var(--font-size-sm); }
+}
+
+.pagination__btn--default {
+  background: var(--color-white);
+  color: var(--color-gray-600);
+  border-color: var(--color-gray-200);
+  box-shadow: var(--shadow-xs);
+}
+
+.pagination__btn--default:hover:not(:disabled) {
+  background: var(--color-primary-50);
+  color: var(--color-primary-600);
+  border-color: var(--color-primary-200);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.pagination__btn--active {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+.pagination__btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-400);
+  width: 34px;
+  font-size: var(--font-size-base);
+  line-height: 1;
+}

@@ -1,0 +1,61 @@
+/* ============================================================
+   RESPONSIVE — Breakpoint utilities & container
+   Breakpoints: xs<480, sm≥480, md≥768, lg≥1024, xl≥1280
+   ============================================================ */
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 480px) {
+  .container { padding-inline: var(--space-6); }
+}
+
+@media (min-width: 768px) {
+  .container { padding-inline: var(--space-8); }
+}
+
+@media (min-width: 1280px) {
+  .container { padding-inline: var(--space-4); }
+}
+
+/* Hide/show helpers */
+.hide-xs  { display: none !important; }
+
+@media (min-width: 480px) {
+  .hide-xs  { display: revert !important; }
+  .hide-sm  { display: none   !important; }
+}
+
+@media (min-width: 768px) {
+  .hide-sm  { display: revert !important; }
+  .hide-md  { display: none   !important; }
+  .show-md  { display: revert !important; }
+}
+
+.show-md { display: none; }
+
+@media (min-width: 1024px) {
+  .hide-md  { display: revert !important; }
+  .hide-lg  { display: none   !important; }
+}
+
+/* Responsive text alignment */
+@media (max-width: 767px) {
+  .text-center-xs { text-align: center; }
+}
+
+/* Responsive flex/grid gap */
+.gap-responsive {
+  gap: var(--space-4);
+}
+@media (min-width: 768px) {
+  .gap-responsive { gap: var(--space-6); }
+}
+@media (min-width: 1024px) {
+  .gap-responsive { gap: var(--space-8); }
+}

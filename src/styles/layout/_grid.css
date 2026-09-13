@@ -1,0 +1,78 @@
+/* ============================================================
+   GRID — Product grid and page layouts
+   ============================================================ */
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  /* Padding lets box-shadows breathe without clipping */
+  padding-bottom: var(--space-2);
+  /* Contain grid strictly within parent width */
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 480px)  { .product-grid { gap: var(--space-4); } }
+@media (min-width: 900px)  { .product-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); } }
+@media (min-width: 1280px) { .product-grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-6); } }
+
+/* Products page: sidebar + main */
+.products-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: stretch;   /* stretch, not flex-start */
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .products-layout { flex-direction: row; gap: var(--space-8); align-items: flex-start; }
+}
+
+/* Sidebar */
+.sidebar { width: 100%; min-width: 0; }
+
+@media (min-width: 1024px) {
+  .sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    position: sticky;
+    top: calc(var(--navbar-total-height) + var(--space-4));
+    max-height: calc(100vh - var(--navbar-total-height) - var(--space-8));
+    overflow-y: auto;
+  }
+}
+
+/* Main content — must shrink to fit, never overflow */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  overflow: visible; /* let shadows breathe */
+}
+
+/* Detail layout */
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) { .detail-layout { grid-template-columns: 1fr 1fr; gap: var(--space-10); } }
+
+/* Featured grid */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  width: 100%;
+  min-width: 0;
+  padding-bottom: var(--space-2);
+}
+
+@media (min-width: 480px)  { .featured-grid { gap: var(--space-4); } }
+@media (min-width: 768px)  { .featured-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .featured-grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-5); } }

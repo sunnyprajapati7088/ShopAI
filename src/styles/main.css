@@ -1,0 +1,43 @@
+/* ============================================================
+   MAIN CSS — Import order matters
+   1. Base (variables, reset, typography)
+   2. Utilities (animations, scrollbar, responsive)
+   3. Components (buttons, cards, forms, etc.)
+   4. Layout (navbar, grid, footer)
+   5. Pages (home, products, detail, cart, wishlist)
+   ============================================================ */
+
+/* 1. Base */
+@import './base/_variables.css';
+@import './base/_reset.css';
+@import './base/_typography.css';
+
+/* 2. Utilities */
+@import './utilities/_animations.css';
+@import './utilities/_scrollbar.css';
+@import './utilities/_responsive.css';
+
+/* 3. Components */
+@import './components/_buttons.css';
+@import './components/_badges.css';
+@import './components/_cards.css';
+@import './components/_skeleton.css';
+@import './components/_forms.css';
+@import './components/_stars.css';
+@import './components/_carousel.css';
+@import './components/_magicui.css';
+@import './components/_theme-toggle.css';
+@import './components/_loader.css';
+
+/* 4. Layout */
+@import './layout/_page.css';
+@import './layout/_navbar.css';
+@import './layout/_grid.css';
+@import './layout/_footer.css';
+
+/* 5. Pages */
+@import './pages/_home.css';
+@import './pages/_products.css';
+@import './pages/_detail.css';
+@import './pages/_cart.css';
+@import './pages/_wishlist.css';

@@ -1,0 +1,92 @@
+/* ============================================================
+   STAR RATING — Animated, premium gold gradient stars
+   ============================================================ */
+
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.star-rating__stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: 0.875rem;
+  line-height: 1;
+  transition: transform var(--transition-spring);
+  display: inline-block;
+}
+
+.star:hover { transform: scale(1.2); }
+
+.star--filled {
+  color: var(--color-amber-400);
+  filter: drop-shadow(0 1px 3px rgba(251, 191, 36, 0.5));
+}
+
+.star--empty  { color: var(--color-gray-300); }
+
+.star--half {
+  color: var(--color-amber-400);
+  opacity: 0.55;
+}
+
+.star-rating__value {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-500);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Large variant */
+.star-rating--lg .star { font-size: 1.2rem; }
+.star-rating--lg .star-rating__value { font-size: var(--font-size-sm); }
+
+/* ── Filter pill ── */
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 4px 12px 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  background: linear-gradient(135deg, var(--color-primary-100), var(--color-accent-100));
+  color: var(--color-primary-700);
+  border: 1px solid var(--color-primary-200);
+  animation: scaleIn 0.2s ease both;
+  transition: box-shadow var(--transition-base), transform var(--transition-spring);
+}
+
+.filter-pill:hover {
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.15);
+  transform: translateY(-1px);
+}
+
+.filter-pill__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-200);
+  color: var(--color-primary-700);
+  font-size: 9px;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-spring);
+  border: none;
+  margin-left: 2px;
+  line-height: 1;
+}
+
+.filter-pill__remove:hover {
+  background: var(--color-rose-500);
+  color: var(--color-white);
+  transform: scale(1.15);
+}

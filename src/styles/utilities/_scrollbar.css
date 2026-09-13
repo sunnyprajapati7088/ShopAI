@@ -1,0 +1,75 @@
+/* ============================================================
+   SCROLLBAR — Premium custom scrollbar, applied globally
+   Gradient thumb, styled track, dark-mode aware
+   ============================================================ */
+
+/* ── Global scrollbar (Chrome / Edge / Safari) ── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-gray-100);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--color-primary-400),
+    var(--color-accent-500)
+  );
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-gray-100);   /* creates padding illusion */
+  transition: background var(--transition-base);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    var(--color-primary-500),
+    var(--color-accent-600)
+  );
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-gray-100);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary-400) var(--color-gray-100);
+}
+
+/* ── Dark theme overrides ── */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--color-gray-200);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-primary-500), var(--color-accent-500));
+  border-color: var(--color-gray-200);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-corner {
+  background: var(--color-gray-200);
+}
+
+[data-theme="dark"] * {
+  scrollbar-color: var(--color-primary-500) var(--color-gray-200);
+}
+
+/* ── Utility: hide scrollbar (keep scroll) ── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ── Utility: thin scrollbar (overrides global for small containers) ── */
+.scrollbar-thin::-webkit-scrollbar { width: 4px; height: 4px; }
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  border-width: 1px;
+}

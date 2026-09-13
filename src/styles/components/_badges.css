@@ -1,0 +1,112 @@
+/* ============================================================
+   BADGES — Category tags, labels, status chips
+   Premium gradient variants, animated entrance
+   ============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: capitalize;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  line-height: 1.4;
+  animation: scaleInBounce 0.3s var(--transition-spring) both;
+  transition: transform var(--transition-spring), box-shadow var(--transition-base);
+}
+
+.badge:hover { transform: scale(1.04); }
+
+.badge-indigo {
+  background: linear-gradient(135deg, var(--color-primary-100), var(--color-accent-100));
+  color: var(--color-primary-700);
+  border: 1px solid var(--color-primary-200);
+}
+
+.badge-green {
+  background: linear-gradient(135deg, var(--color-success-100), #bbf7d0);
+  color: var(--color-success-600);
+  border: 1px solid #86efac;
+}
+
+.badge-yellow {
+  background: linear-gradient(135deg, var(--color-warning-100), #fde68a);
+  color: var(--color-warning-600);
+  border: 1px solid #fcd34d;
+}
+
+.badge-red {
+  background: linear-gradient(135deg, var(--color-danger-100), #fecdd3);
+  color: var(--color-rose-600);
+  border: 1px solid var(--color-danger-300);
+}
+
+.badge-gray {
+  background: var(--color-gray-100);
+  color: var(--color-gray-600);
+  border: 1px solid var(--color-gray-200);
+}
+
+.badge-ghost {
+  background: rgba(255, 255, 255, 0.22);
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+/* Gradient badge */
+.badge-gradient {
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+/* Notification dot badge */
+.badge-dot {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-white);
+  animation: scaleInBounce 0.35s var(--transition-spring) both;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.35);
+}
+
+.badge-dot--danger {
+  background: linear-gradient(135deg, var(--color-rose-500), var(--color-rose-600));
+  box-shadow: 0 2px 6px rgba(244, 63, 94, 0.35);
+}
+
+/* Discount badge */
+.badge-discount {
+  background: linear-gradient(135deg, var(--color-success-100), #bbf7d0);
+  color: var(--color-success-600);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  border: 1px solid #86efac;
+  animation: scaleInBounce 0.4s var(--transition-spring) both;
+  letter-spacing: 0.02em;
+}
+
+/* AI badge */
+.badge-ai {
+  background: linear-gradient(135deg, var(--color-primary-100), var(--color-accent-100));
+  color: var(--color-accent-700);
+  border: 1px solid var(--color-primary-200);
+  animation: glowPulse 3s ease-in-out infinite;
+}
