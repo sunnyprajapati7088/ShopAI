@@ -47,6 +47,8 @@
   justify-content: center;
   background: var(--color-gray-950, #020617);
   overflow: hidden;
+  /* Never block user interaction with the app underneath */
+  pointer-events: none;
 }
 
 .page-loader--exit {

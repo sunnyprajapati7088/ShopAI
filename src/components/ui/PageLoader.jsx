@@ -1,70 +1,68 @@
-// PageLoader.jsx — Full-screen pixel-perfect branded splash loader
+// PageLoader.jsx — Full-screen branded splash loader
+// Calls onDone as soon as exit animation starts so the app
+// is fully interactive while the loader fades out.
 import { useEffect, useState } from 'react'
 
 const PageLoader = ({ onDone }) => {
   const [progress, setProgress] = useState(0)
-  const [phase, setPhase] = useState('loading') // 'loading' | 'done' | 'hidden'
+  const [phase, setPhase]       = useState('loading') // 'loading' | 'exit' | 'hidden'
 
   useEffect(() => {
-    // Simulate realistic loading progress
-    const steps = [
-      { target: 30, delay: 80  },
-      { target: 60, delay: 180 },
-      { target: 80, delay: 280 },
-      { target: 95, delay: 400 },
-      { target: 100, delay: 600 },
-    ]
-
-    let current = 0
     const timers = []
 
-    steps.forEach(({ target, delay }) => {
-      const t = setTimeout(() => {
-        setProgress(target)
-        if (target === 100) {
-          const t2 = setTimeout(() => {
-            setPhase('done')
-            const t3 = setTimeout(() => {
-              setPhase('hidden')
-              onDone?.()
-            }, 600)
-            timers.push(t3)
-          }, 300)
-          timers.push(t2)
-        }
-      }, delay)
+    const schedule = (fn, delay) => {
+      const t = setTimeout(fn, delay)
       timers.push(t)
-    })
+    }
+
+    // Rapid progress steps — total ~700ms
+    schedule(() => setProgress(30),  80)
+    schedule(() => setProgress(60),  200)
+    schedule(() => setProgress(80),  350)
+    schedule(() => setProgress(95),  500)
+    schedule(() => setProgress(100), 650)
+
+    // Start exit animation at 700ms
+    schedule(() => {
+      setPhase('exit')
+      // ✅ Call onDone immediately when exit starts — app becomes
+      //    fully interactive while loader fades out in background
+      onDone?.()
+    }, 700)
+
+    // Remove from DOM after animation completes (550ms)
+    schedule(() => setPhase('hidden'), 1300)
 
     return () => timers.forEach(clearTimeout)
-  }, [onDone])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (phase === 'hidden') return null
 
   return (
-    <div className={`page-loader ${phase === 'done' ? 'page-loader--exit' : ''}`} role="status" aria-label="Loading">
-      {/* Background gradient mesh */}
-      <div className="page-loader__bg" aria-hidden="true" />
+    <div
+      className={`page-loader ${phase === 'exit' ? 'page-loader--exit' : ''}`}
+      role="status"
+      aria-label="Loading"
+      // Always non-interactive — never blocks the app underneath
+      style={{ pointerEvents: 'none' }}
+    >
+      <div className="page-loader__bg"      aria-hidden="true" />
       <div className="page-loader__orb page-loader__orb--1" aria-hidden="true" />
       <div className="page-loader__orb page-loader__orb--2" aria-hidden="true" />
 
       <div className="page-loader__content">
-        {/* Spinning ring */}
         <div className="page-loader__ring" aria-hidden="true">
           <div className="page-loader__ring-inner" />
           <div className="page-loader__ring-pulse" />
         </div>
 
-        {/* Logo */}
         <div className="page-loader__logo">
           <span className="page-loader__logo-icon">🛍️</span>
           <span className="page-loader__logo-text">ShopAI</span>
         </div>
 
-        {/* Tagline */}
         <p className="page-loader__tagline">Loading your experience…</p>
 
-        {/* Progress bar */}
         <div className="page-loader__bar-wrap" aria-hidden="true">
           <div
             className="page-loader__bar-fill"
@@ -72,8 +70,9 @@ const PageLoader = ({ onDone }) => {
           />
         </div>
 
-        {/* Progress number */}
-        <span className="page-loader__pct" aria-hidden="true">{Math.round(progress)}%</span>
+        <span className="page-loader__pct" aria-hidden="true">
+          {Math.round(progress)}%
+        </span>
       </div>
     </div>
   )

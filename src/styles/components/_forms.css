@@ -1,6 +1,6 @@
 /* ============================================================
-   FORMS — Search focus glow ring, gradient border input,
-   premium interactive states
+   FORMS — Search bar, quantity control
+   Uses semantic tokens that work in light AND dark mode
    ============================================================ */
 
 /* ── Search bar ── */
@@ -13,39 +13,70 @@
   width: 100%;
   padding: 10px 38px 10px 38px;
   font-size: var(--font-size-sm);
-  color: var(--color-gray-800);
-  background: var(--color-white);
+  /* Explicit light-mode safe colors */
+  color: #1e293b;
+  background: #ffffff;
   border: 1.5px solid var(--color-gray-200);
   border-radius: var(--radius-xl);
   outline: none;
   transition:
     border-color var(--transition-base),
     box-shadow var(--transition-base),
-    background var(--transition-base),
-    transform var(--transition-spring);
+    background var(--transition-base);
   -webkit-appearance: none;
   appearance: none;
   font-family: var(--font-family-base);
+  /* Force correct rendering */
+  -webkit-text-fill-color: #1e293b;
 }
 
 .search-bar__input::-webkit-search-cancel-button { display: none; }
 .search-bar__input::-webkit-search-decoration     { display: none; }
-.search-bar__input::placeholder { color: var(--color-gray-400); }
+
+.search-bar__input::placeholder {
+  color: #94a3b8;
+  -webkit-text-fill-color: #94a3b8;
+  opacity: 1;
+}
 
 .search-bar__input:hover {
   border-color: var(--color-primary-300);
-  background: var(--color-gray-50);
+  background: #f8fafc;
 }
 
-/* Focus: gradient-style glow ring */
 .search-bar__input:focus {
   border-color: var(--color-primary-400);
   box-shadow:
     0 0 0 4px rgba(99, 102, 241, 0.14),
-    0 0 0 1px rgba(99, 102, 241, 0.2),
-    0 4px 12px rgba(79, 70, 229, 0.08);
-  background: var(--color-white);
-  transform: translateY(-1px);
+    0 0 0 1px rgba(99, 102, 241, 0.2);
+  background: #ffffff;
+  outline: none;
+}
+
+/* ── Dark mode overrides ── */
+[data-theme="dark"] .search-bar__input {
+  color: #f1f5f9;
+  background: #1e293b;
+  border-color: #334155;
+  -webkit-text-fill-color: #f1f5f9;
+}
+
+[data-theme="dark"] .search-bar__input::placeholder {
+  color: #64748b;
+  -webkit-text-fill-color: #64748b;
+}
+
+[data-theme="dark"] .search-bar__input:hover {
+  background: #253347;
+  border-color: #4338ca;
+}
+
+[data-theme="dark"] .search-bar__input:focus {
+  background: #1e293b;
+  border-color: #818cf8;
+  box-shadow:
+    0 0 0 4px rgba(99, 102, 241, 0.2),
+    0 0 0 1px rgba(99, 102, 241, 0.3);
 }
 
 /* Icon left */
@@ -54,19 +85,20 @@
   left: 11px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--color-gray-400);
+  color: #94a3b8;
   display: flex;
   align-items: center;
   pointer-events: none;
   line-height: 1;
   transition: color var(--transition-fast);
+  z-index: 1;
 }
 
 .search-bar:focus-within .search-bar__icon {
   color: var(--color-primary-500);
 }
 
-/* Clear button right */
+/* Clear button */
 .search-bar__clear {
   position: absolute;
   right: 9px;
@@ -88,15 +120,16 @@
   cursor: pointer;
   border: none;
   line-height: 1;
+  z-index: 1;
 }
 
 .search-bar__clear:hover {
   background: var(--color-rose-500);
-  color: var(--color-white);
+  color: #fff;
   transform: translateY(-50%) scale(1.1);
 }
 
-/* ── Quantity control (also in _cart.css; kept here for reuse) ── */
+/* ── Quantity control ── */
 .qty-control {
   display: flex;
   align-items: center;
@@ -132,7 +165,7 @@
 
 .qty-control__btn:hover:not(:disabled) {
   background: var(--gradient-primary);
-  color: var(--color-white);
+  color: #fff;
   border-color: transparent;
   transform: scale(1.08);
   box-shadow: 0 3px 8px rgba(79, 70, 229, 0.3);
