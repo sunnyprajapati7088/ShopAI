@@ -1,75 +1,102 @@
 /* ============================================================
-   SCROLLBAR — Premium custom scrollbar, applied globally
-   Gradient thumb, styled track, dark-mode aware
+   CUSTOM SCROLLBAR — Premium gradient, works in Chrome/Edge/Safari
+   Firefox uses scrollbar-color (limited styling support)
    ============================================================ */
 
-/* ── Global scrollbar (Chrome / Edge / Safari) ── */
+/* ── Global scrollbar ── */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-gray-100);
-  border-radius: var(--radius-full);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(
     180deg,
-    var(--color-primary-400),
-    var(--color-accent-500)
+    #6366f1 0%,
+    #8b5cf6 50%,
+    #7c3aed 100%
   );
-  border-radius: var(--radius-full);
-  border: 2px solid var(--color-gray-100);   /* creates padding illusion */
-  transition: background var(--transition-base);
+  border-radius: 999px;
+  border: none;
+  transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(
     180deg,
-    var(--color-primary-500),
-    var(--color-accent-600)
+    #4f46e5 0%,
+    #7c3aed 50%,
+    #6d28d9 100%
+  );
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(
+    180deg,
+    #4338ca 0%,
+    #6d28d9 100%
   );
 }
 
 ::-webkit-scrollbar-corner {
-  background: var(--color-gray-100);
+  background: transparent;
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-primary-400) var(--color-gray-100);
+  scrollbar-color: #7c3aed transparent;
 }
 
-/* ── Dark theme overrides ── */
+/* ── Dark mode — brighter thumb so it's visible ── */
 [data-theme="dark"] ::-webkit-scrollbar-track {
-  background: var(--color-gray-200);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-primary-500), var(--color-accent-500));
-  border-color: var(--color-gray-200);
+  background: linear-gradient(
+    180deg,
+    #818cf8 0%,
+    #a78bfa 50%,
+    #8b5cf6 100%
+  );
 }
 
-[data-theme="dark"] ::-webkit-scrollbar-corner {
-  background: var(--color-gray-200);
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #6366f1 0%,
+    #8b5cf6 50%,
+    #7c3aed 100%
+  );
 }
 
 [data-theme="dark"] * {
-  scrollbar-color: var(--color-primary-500) var(--color-gray-200);
+  scrollbar-color: #8b5cf6 rgba(255, 255, 255, 0.03);
 }
 
-/* ── Utility: hide scrollbar (keep scroll) ── */
+/* ── Sidebar specific — slightly thinner ── */
+.sidebar ::-webkit-scrollbar { width: 4px; }
+.sidebar ::-webkit-scrollbar-thumb { border-radius: 999px; }
+
+/* ── Horizontal scrollbar (category pills on mobile) ── */
+.sidebar-panel ::-webkit-scrollbar { height: 3px; }
+.sidebar-panel ::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 999px;
+}
+
+/* ── Hide scrollbar — utility class ── */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-/* ── Utility: thin scrollbar (overrides global for small containers) ── */
-.scrollbar-thin::-webkit-scrollbar { width: 4px; height: 4px; }
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  border-width: 1px;
-}
+/* ── Thin scrollbar — utility class ── */
+.scrollbar-thin::-webkit-scrollbar        { width: 4px; height: 4px; }
+.scrollbar-thin::-webkit-scrollbar-thumb  { border-radius: 999px; }
